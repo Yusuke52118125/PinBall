@@ -39,45 +39,32 @@ public class FripperController : MonoBehaviour
 			SetAngle(this.defaultAngle);
 		}
 
-		//タッチ操作
-		if(Input.touchCount == 1)
-        {
-			Touch touch = Input.GetTouch(0);
+		for (int i = 0; i < Input.touchCount ; i++)
+		{
+			Touch touch = Input.GetTouch(i);
 			//左フリッパー動作
-			if(touch.phase == TouchPhase.Began && (Input.mousePosition.x < Screen.width / 2.0f) && tag =="LeftFripperTag")
-            {
+			if (touch.phase == TouchPhase.Began && (Input.touches[i].position.x < Screen.width / 2.0f) && tag == "LeftFripperTag")
+			{
 				SetAngle(this.flickAngle);
 			}
 			//右フリッパー動作
-			if (touch.phase == TouchPhase.Began && (Input.mousePosition.x > Screen.width / 2.0f) && tag =="RightFripperTag")
+			if (touch.phase == TouchPhase.Began && (Input.touches[i].position.x > Screen.width / 2.0f) && tag == "RightFripperTag")
 			{
 				SetAngle(this.flickAngle);
 			}
 			//左フリッパー動作止め
-			if (touch.phase == TouchPhase.Ended && (Input.mousePosition.x < Screen.width / 2.0f) && tag == "LeftFripperTag")
+			if (touch.phase == TouchPhase.Ended && (Input.touches[i].position.x < Screen.width / 2.0f) && tag == "LeftFripperTag")
 			{
 				SetAngle(this.defaultAngle);
 			}
 			//右フリッパー動作止め
-			if (touch.phase == TouchPhase.Ended && (Input.mousePosition.x > Screen.width / 2.0f) && tag == "RightFripperTag")
+			if (touch.phase == TouchPhase.Ended && (Input.touches[i].position.x > Screen.width / 2.0f) && tag == "RightFripperTag")
 			{
 				SetAngle(this.defaultAngle);
 			}
 		}
-		if(Input.touchCount >= 2)
-        {
-			Touch touch = Input.GetTouch(0);
-			//両上げ動作
-			if (touch.phase == TouchPhase.Began && tag == "RightFripperTag" && tag == "LeftFripperTag")
-            {
-				SetAngle(this.flickAngle);
-			}
-			//両上げ動作止め
-			if (touch.phase == TouchPhase.Ended && tag == "RightFripperTag" && tag == "LeftFripperTag")
-			{
-				SetAngle(this.defaultAngle);
-			}
-		}
+
+		
 
 	}
 	//フリッパーの傾きを設定
